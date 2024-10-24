@@ -1,0 +1,35 @@
+hostname R4
+interface Loopback0
+ description loopback
+ ip address 4.127.0.4 255.255.255.255
+ no shutdown
+interface GigabitEthernet1/0
+ description R4_R1
+ ip address 4.4.1.1 255.255.255.252
+ no shutdown
+interface GigabitEthernet2/0
+ description R4_R2
+ ip address 2.2.4.2 255.255.255.252
+ no shutdown
+interface GigabitEthernet3/0
+ description R4_R3
+ ip address 3.3.4.2 255.255.255.252
+ no shutdown
+router ospf 1
+ network 4.0.0.0 0.255.255.255 area 0
+router bgp 4
+ neighbor 4.4.1.2 remote-as 1
+ neighbor 2.2.4.1 remote-as 2
+ neighbor 3.3.4.1 remote-as 3
+
+ neighbor 4.4.1.2 route-map MYPREF1 in
+ neighbor 2.2.4.1 route-map MYPREF2 in
+ neighbor 3.3.4.1 route-map MYPREF3 in
+
+route-map MYPREF1 permit 10
+ set local-preference 100
+route-map MYPREF2 permit 10
+ set local-preference 100
+route-map MYPREF3 permit 10
+ set local-preference 100
+do wr

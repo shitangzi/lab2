@@ -1,0 +1,46 @@
+project_name: badgadget
+gns3_server: http://127.0.0.1:8080
+gns3_host_ip: 127.0.0.1
+START_CFGS_PATH: input/badgadget/startcfgs/
+MGMT-SW: null
+global_delay_factor: 3
+gns3_nodes:
+- appliance: c7200
+  name: R1
+- appliance: c7200
+  name: R2
+- appliance: c7200
+  name: R3
+- appliance: c7200
+  name: R4
+gns3_links:
+- node1_name: R1
+  node1_interface: '2'
+  node2_name: R2
+  node2_interface: '1'
+- node1_name: R1
+  node1_interface: '3'
+  node2_name: R3
+  node2_interface: '1'
+- node1_name: R1
+  node1_interface: '4'
+  node2_name: R4
+  node2_interface: '1'
+- node1_name: R2
+  node1_interface: '3'
+  node2_name: R3
+  node2_interface: '2'
+- node1_name: R2
+  node1_interface: '4'
+  node2_name: R4
+  node2_interface: '2'
+- node1_name: R3
+  node1_interface: '4'
+  node2_name: R4
+  node2_interface: '3'
+gns3_startup_config_telnet:
+- name: R1
+- name: R2
+- name: R3
+- name: R4
+gns3_mgmt_links: []
